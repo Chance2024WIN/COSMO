@@ -1,0 +1,14 @@
+# comment (should be skipped)								
+Chromosome	ena	gene	194993	196657	.	+	.	gene_id "Rv0166"; gene_name "fadD5"; gene_source "ena"; gene_biotype "protein_coding";
+Chromosome	ena	gene	196861	197658	.	+	.	gene_id "Rv0167"; gene_name "yrbE1A"; gene_source "ena"; gene_biotype "protein_coding";
+Chromosome	ena	gene	197660	198529	.	+	.	gene_id "Rv0168"; gene_name "yrbE1B"; gene_source "ena"; gene_biotype "protein_coding";
+Chromosome	ena	gene	198534	199898	.	+	.	gene_id "Rv0169"; gene_name "mce1A"; gene_source "ena"; gene_biotype "protein_coding";
+Chromosome	ena	gene	199895	200935	.	+	.	gene_id "Rv0170"; gene_name "mce1B"; gene_source "ena"; gene_biotype "protein_coding";
+Chromosome	ena	gene	200932	202479	.	+	.	gene_id "Rv0171"; gene_name "mce1C"; gene_source "ena"; gene_biotype "protein_coding";
+Chromosome	ena	gene	202476	204068	.	+	.	gene_id "Rv0172"; gene_name "mce1D"; gene_source "ena"; gene_biotype "protein_coding";
+Chromosome	ena	gene	204065	205237	.	+	.	gene_id "Rv0173"; gene_name "lprK"; gene_source "ena"; gene_biotype "protein_coding";
+Chromosome	ena	gene	205231	206778	.	+	.	gene_id "Rv0174"; gene_name "mce1F"; gene_source "ena"; gene_biotype "protein_coding";
+Chromosome	ena	gene	206814	207455	.	+	.	gene_id "Rv0175"; gene_source "ena"; gene_biotype "protein_coding";
+Chromosome	ena	gene	207452	208420	.	+	.	gene_id "Rv0176"; gene_source "ena"; gene_biotype "protein_coding";
+Chromosome	ena	gene	208417	208971	.	+	.	gene_id "Rv0177"; gene_source "ena"; gene_biotype "protein_coding";
+Chromosome	ena	gene	208938	209672	.	+	.	gene_id "Rv0178"; gene_source "ena"; gene_biotype "protein_coding";
