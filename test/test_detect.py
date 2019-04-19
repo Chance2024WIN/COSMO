@@ -5,8 +5,6 @@ from operon.detect import Detect
 from argparse import Namespace
 import os
 
-from operon.gtf_process import GtfProcess
-
 
 def test_detect():
     cwd = os.path.dirname(__file__)
@@ -18,14 +16,9 @@ def test_detect():
     detect = Detect(args.ref, args.length, args.bam, args.gtf)
     assert detect.ref_seq == 'NC_000962'
     assert detect.gene_depth == 10
-    detect.analyze()
+    # detect.analyze()
     alignment_file = pysam.AlignmentFile(detect.bam_file, 'rb')
-    gtf_process = GtfProcess(detect.gtf_file)
-    lines = gtf_process.lines()
-    line = lines.__next__()
-    cov = average_coverage(alignment_file, detect.ref_seq, int(line['start']), int(line['end']), line['strand'])
-    assert round(cov,2) == 107.20
-    line = lines.__next__()
-    cov = average_coverage(alignment_file, detect.ref_seq, int(line['start']), int(line['end']), line['strand'])
-    assert round(cov, 2) == 107.20
-    alignment_file.close()
+    cov = average_coverage(alignment_file, detect.ref_seq, 75301, 76212, '+')
+    assert round(cov,2) == 9.5
+    cov = average_coverage(alignment_file, detect.ref_seq, 80624, 81673, '+')
+    assert round(cov,2) == 0.0

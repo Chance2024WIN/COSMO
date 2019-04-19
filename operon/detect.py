@@ -1,3 +1,19 @@
+# Copyright (C) 2019  Hocine Bendou <hocine@sanbi.ac.za>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>
+# Roback, P et al. “A predicted operon map for Mycobacterium tuberculosis.”
+# Nucleic acids research vol. 35,15 (2007): 5085-95. doi:10.1093/nar/gkm518
 from dataclasses import dataclass, field
 from . import Analyze, average_coverage
 from .gtf_process import GtfProcess
@@ -99,6 +115,8 @@ class Detect(Analyze):
             end = int(line['end'])
             avg_cov = average_coverage(alignment_file, self.ref_seq, start, end, line['strand'])
             if op is None:
+                if line['gene_id'] == 'Rv0072':
+                    print("Rv0073 avg cov = " + str(avg_cov))
                 op = Operon.operon(start, end, line['strand'], line['gene_id'], avg_cov)
             elif avg_cov < self.gene_depth:
                 self.print(fs_writer, op)
@@ -116,7 +134,6 @@ class Detect(Analyze):
                 self.print(fs_writer, op)
                 op = Operon.operon(start, end, line['strand'], line['gene_id'], avg_cov)
             else:
-
                 if op.end < start and start - op.end > 4:
                     igr_cov = average_coverage(alignment_file, self.ref_seq, op.end, start, line['strand'])
                     # mean = (start - op.end) / 2
