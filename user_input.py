@@ -15,9 +15,10 @@
 from operon.detect import Detect
 import argparse
 
+
 def run_command(args: argparse.ArgumentParser):
     """
-    Execute user's input command and return detected operons in csv files
+    Execute user's input command and return detected operons in a csv file
     """
     detect = Detect(args.ref, args.length, args.bam, args.gtf)
     detect.analyze()
