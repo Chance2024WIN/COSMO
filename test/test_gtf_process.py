@@ -8,6 +8,6 @@ def test_parse_line():
     gtf_process = GtfProcess(filename)
     lines = gtf_process.lines()
     gene_1 = lines.__next__()
-    assert gene_1['gene_id'] == "Rv0046c"
+    assert gene_1['gene_id'] == "Rv0166"
     gene_2 = lines.__next__()
-    assert gene_2['gene_id'] == "Rv0047c"
+    assert gene_2['gene_id'] == "Rv0167"
