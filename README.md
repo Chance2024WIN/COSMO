@@ -9,8 +9,8 @@ A single mRNA unit is transcribed and translated into separate proteins.
 
 *tb_operon_detection* takes as input an aligned BAM file to TB reference genome, a GTF file with gene's 
 coordinates and predict operons by calculating average coverages of the genes and their intergenic regions 
-in the reference genome. The ratios of the coverages are compared if they don't exceed threshold value, 
-given as input, the genes form the same operon, if not the genes are in separate operons.
+in the reference genome. The ratios of the coverages are compared if they don't exceed a threshold value 
+given as input. The genes then form the same operon. If not the genes are in separate operons.
 
 #### Requirements
 1. Python >= 3.7
