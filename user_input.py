@@ -20,7 +20,8 @@ def run_command(args: argparse.ArgumentParser):
     """
     Execute user's input command and return detected operons in a csv file
     """
-    detect = Detect(args.ref, args.length, args.bam, args.gtf)
+    detect = Detect(args.ref, args.length, args.bam, args.gtf, args.gdepth, args.idepth,
+                    args.gfactor, args.ifactor, args.output)
     detect.analyze()
 
     
@@ -43,7 +44,7 @@ def main():
                                                 "same Operon", type=float, default=4.5)
     parser.add_argument("-f", "--ifactor", help="Allowed difference factor of IGR and adjacent gene's coverages "
                                                 "to be part of same operon", type=float, default=5.0)
-    parser.add_argument("-p", "--prefix", help="Prefix output files", type=str, default="out-")
+    parser.add_argument("-o", "--output", help="CSV output filename under output folder", type=str, default="detected-operons.csv")
 
     args = parser.parse_args()
     run_command(args)
