@@ -115,8 +115,6 @@ class Detect(Analyze):
             end = int(line['end'])
             avg_cov = average_coverage(alignment_file, self.ref_seq, start, end, line['strand'])
             if op is None:
-                if line['gene_id'] == 'Rv0072':
-                    print("Rv0073 avg cov = " + str(avg_cov))
                 op = Operon.operon(start, end, line['strand'], line['gene_id'], avg_cov)
             elif avg_cov < self.gene_depth:
                 self.print(fs_writer, op)

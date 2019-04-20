@@ -25,13 +25,20 @@ def run_command(args: argparse.ArgumentParser):
 
     
 def main():
+
     parser = argparse.ArgumentParser(description="Detect possible genome operons using RNA expression coverages")
-    parser.add_argument("-r", "--ref", help="Name of reference sequence in BAM file", type=str)
-    parser.add_argument("-l", "--length", help="Length of reference sequence", type=int)
-    parser.add_argument("-b", "--bam", help="Bam input file", type=argparse.FileType())
-    parser.add_argument("-g", "--gtf", help="Gtf input file")
-    parser.add_argument("-D", "--gdepth", help="Average number of reads per base required to consider a gene expressed", type=int, default=10)
-    parser.add_argument("-d", "--idepth", help="Average number of reads per base required to consider a IGR expressed", type=int, default=10)
+
+    # positional arguments
+    parser.add_argument("ref", help="Name of reference sequence in BAM file", type=str)
+    parser.add_argument("length", help="Length of reference sequence", type=int)
+    parser.add_argument("bam", help="Bam input file", type=argparse.FileType())
+    parser.add_argument("gtf", help="Gtf input file")
+
+    # optional arguments
+    parser.add_argument("-D", "--gdepth", help="Average number of reads per base required to consider a gene expressed",
+                                          type=int, default=10)
+    parser.add_argument("-d", "--idepth", help="Average number of reads per base required to consider a IGR expressed",
+                                          type=int, default=10)
     parser.add_argument("-F", "--gfactor", help="Allowed difference factor of two gene's coverages to be part of "
                                                 "same Operon", type=float, default=4.5)
     parser.add_argument("-f", "--ifactor", help="Allowed difference factor of IGR and adjacent gene's coverages "
