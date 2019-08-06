@@ -48,7 +48,8 @@ class Operon:
             str(self.end),
             str(self.end - self.start),
             self.strand,
-            str(self.cov),
+            str(self.op_avg_cov()),
+            #str(self.cov),
             str(self.num_genes)
         ]
 
@@ -81,3 +82,28 @@ class Operon:
         for gene in self.genes:
             covs.append(gene.cov)
         return covs
+
+    def op_avg_cov(self):
+        count = 0
+        j = 0
+        eq = ""
+        for i, gene in enumerate(self.genes):
+            if i == 0:
+                j += 1
+                count += gene.cov
+                eq += str(gene.cov)
+            if i > 0:
+                if gene.igr_cov > 0:
+                    eq += ' + ' + str(gene.igr_cov)
+                    count += gene.igr_cov
+                    j+=1
+                count += gene.cov
+                eq += ' + ' + str(gene.cov)
+                j += 1
+
+        if self.genes[0].gene_id == "Rv0081":
+            print (eq + " / " + str(j))
+            print (round(count / j, 2))
+
+        return  round(count / j, 2)
+

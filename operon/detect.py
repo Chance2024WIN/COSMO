@@ -14,6 +14,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>
 # Roback, P et al. “A predicted operon map for Mycobacterium tuberculosis.”
 # Nucleic acids research vol. 35,15 (2007): 5085-95. doi:10.1093/nar/gkm518
+from __future__ import division
 from dataclasses import dataclass, field
 from . import Analyze, average_coverage
 from .gtf_process import GtfProcess
@@ -31,8 +32,8 @@ class Detect(Analyze):
     gtf_file: str
     gene_depth: int = field(default=10)
     igr_depth: int = field(default=10)
-    gene_factor: float = field(default=4.5)
-    igr_factor: float = field(default=4.8)
+    gene_factor: float = field(default=5)
+    igr_factor: float = field(default=5)
     output: str = field(default='detected-operons.csv')
 
     @classmethod
@@ -62,13 +63,20 @@ class Detect(Analyze):
         else:
             val = max_cov
 
-        for cov in op.genes_covs():
-            if avg_cov / cov < self.gene_factor and cov / avg_cov < self.gene_factor:
-                adj_covs.append(cov)
-            else:
-                adj_covs.append(cov)
-                if cov == val:
-                    break
+
+        for i, cov in enumerate(op.genes_covs()):
+            #if cov == 0 or avg_cov ==0: #(Tracey added this line and the next and changes the third line after this to "elif". check Hocine)
+                 #continue
+            try:
+            	if avg_cov / cov < self.gene_factor and cov / avg_cov < self.gene_factor:
+                	adj_covs.append(cov)
+            	else:
+                	adj_covs.append(cov)
+                	if cov == val:
+                	    break
+            except ZeroDivisionError:
+                print ("div zero")
+                pass
 
         return adj_covs
 
@@ -105,7 +113,7 @@ class Detect(Analyze):
         fs = open(os.path.join('./output/', self.output), 'w')
         fs_writer = csv.writer(fs, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         gtf_process = GtfProcess(self.gtf_file)
-        alignment_file = pysam.AlignmentFile(self.bam_file, 'rb', index_filename='test/data/test_file.bai')
+        alignment_file = pysam.AlignmentFile(self.bam_file, 'rb')#, index_filename='test/data/test_file.bai')
         lines = gtf_process.lines()
 
         op = None
@@ -166,7 +174,7 @@ class Detect(Analyze):
                                             r2 = avg_cov / op_covs[i] if op_covs[i] <= adj_covs[-1] else \
                                                  op_covs[i] / avg_cov
                                             if r1 <= r2:
-                                                op_1.genes.append(gene)
+                                                op_1.add_gene(gene.start, gene.end, gene.gene_id, gene.cov, gene.igr_cov)
                                                 adj_covs.append(op_covs[i])
                                             else:
                                                 self.print(fs_writer, op_1)
@@ -174,7 +182,8 @@ class Detect(Analyze):
                                                 is_diff = True
                                         else:
                                             if is_diff:
-                                                op_2.genes.append(gene)
+                                                op_2.add_gene(gene.start, gene.end, gene.gene_id, gene.cov, gene.igr_cov)
+                                                # op_2.genes.append(gene)
                                 if op_2 is None and op_1 is not None:
                                     self.print(fs_writer, op_1)
                                     op_2 = Operon.operon(start, end, line['strand'], line['gene_id'], avg_cov)
@@ -286,3 +295,4 @@ class Detect(Analyze):
             op = None
 
         alignment_file.close()
+
