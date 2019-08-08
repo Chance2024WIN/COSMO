@@ -74,7 +74,7 @@ class Detect(Analyze):
                 	adj_covs.append(cov)
                 	if cov == val:
                 	    break
-            except ZeroDivisionError:)
+            except ZeroDivisionError:
                 pass
 
         return adj_covs
