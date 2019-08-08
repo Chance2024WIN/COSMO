@@ -74,8 +74,7 @@ class Detect(Analyze):
                 	adj_covs.append(cov)
                 	if cov == val:
                 	    break
-            except ZeroDivisionError:
-                print ("div zero")
+            except ZeroDivisionError:)
                 pass
 
         return adj_covs
@@ -123,7 +122,18 @@ class Detect(Analyze):
             end = int(line['end'])
             avg_cov = average_coverage(alignment_file, self.ref_seq, start, end, line['strand'])
             if op is None:
-                op = Operon.operon(start, end, line['strand'], line['gene_id'], avg_cov)
+                if avg_cov < self.gene_depth:
+                    fs_writer.writerow([
+                        line['gene_id'],
+                        str(start),
+                        str(end),
+                        str(end - start),
+                        line['strand'],
+                        "NOT EXPRESSED",
+                        str(avg_cov)
+                    ])
+                else:
+                    op = Operon.operon(start, end, line['strand'], line['gene_id'], avg_cov)
             elif avg_cov < self.gene_depth:
                 self.print(fs_writer, op)
                 fs_writer.writerow([
@@ -295,4 +305,3 @@ class Detect(Analyze):
             op = None
 
         alignment_file.close()
-

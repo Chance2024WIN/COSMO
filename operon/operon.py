@@ -101,9 +101,4 @@ class Operon:
                 eq += ' + ' + str(gene.cov)
                 j += 1
 
-        if self.genes[0].gene_id == "Rv0081":
-            print (eq + " / " + str(j))
-            print (round(count / j, 2))
-
         return  round(count / j, 2)
-
