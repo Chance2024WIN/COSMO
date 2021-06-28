@@ -1,5 +1,6 @@
 # COSMO
-A tool for detecting operons in microorganisms
+
+Condition-specific Mapping of Operons (COSMO) is a tool for detecting operons in microorganisms
 
 [![CircleCI](https://circleci.com/gh/hocinebendou/tb_operon_detection.svg?style=svg)](https://circleci.com/gh/hocinebendou/tb_operon_detection)
 
