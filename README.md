@@ -1,5 +1,5 @@
-# tb_operon_detection
-A tool for detecting operons in Mycobacterium Tuberculosis 
+# COSMO
+A tool for detecting operons in microorganisms
 
 [![CircleCI](https://circleci.com/gh/hocinebendou/tb_operon_detection.svg?style=svg)](https://circleci.com/gh/hocinebendou/tb_operon_detection)
 
@@ -44,11 +44,9 @@ optional arguments:
                         Average number of reads per base required to consider
                         a IGR expressed
   -F GFACTOR, --gfactor GFACTOR
-                        Allowed difference factor of two gene's coverages to
-                        be part of same Operon
+                        Maximum fold difference (FD) allowed between two genes/CDSs of an operon
   -f IFACTOR, --ifactor IFACTOR
-                        Allowed difference factor of IGR and adjacent gene's
-                        coverages to be part of same operon
+                        Maximum FD allowed between an intergenic region (IGR) and its flanking genes/CDSs
   -o OUTPUT, --output OUTPUT
-                        CSV output filename under output folder
+                        CSV output filename (output file is written to "output" folder)
 ```    
