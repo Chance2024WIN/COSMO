@@ -8,9 +8,9 @@ An **Operon** consists of a group of structural genes that codes for enzymes inv
 The genes of an operon are located contiguously on a stretch DNA and are under the control of one promoter.
 A single mRNA unit is transcribed and translated into separate proteins.
 
-*COSMO* takes as input an reference genome aligned BAM file and a GTF file with gene's coordinates. 
-COSMO predicts operons by calculating average coverages of the genes/CDSs and their intergenic regions (IGRs)
-in the reference genome. The user provides four cut-offs which determine whether genes/CDSs form part of the same operon. 
+*COSMO* takes as input, a reference genome aligned BAM file and a GTF file with gene's coordinates. 
+COSMO predicts operons by calculating average coverages of the genes/CDSs and their intergenic regions (IGRs). 
+The user provides four cut-offs which determine whether genes/CDSs form part of the same operon. 
 If they fail any one of these cut-offs, then they are not part of the operon.
 
 #### Requirements
