@@ -30,8 +30,8 @@ class Detect(Analyze):
     ref_len: int
     bam_file: str
     gtf_file: str
-    gene_depth: int = field(default=10)
-    igr_depth: int = field(default=10)
+    gene_depth: int = field(default=2)
+    igr_depth: int = field(default=1)
     gene_factor: float = field(default=5)
     igr_factor: float = field(default=5)
     output: str = field(default='detected-operons.csv')
