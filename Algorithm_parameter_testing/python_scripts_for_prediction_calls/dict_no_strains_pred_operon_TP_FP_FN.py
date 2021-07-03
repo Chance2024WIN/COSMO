@@ -10,10 +10,7 @@
 # path to files ending in *calls_&_cov_all_lineages.txt
 
 ## Output
-## TWO output files:
-# 1. "_calls_per_lineage_&_condition.txt"
-# AND
-# 2. All files ending in: *CONT_calls_&_cov_all_lineages.txt
+## file called: Intersection_calls_ALL_lineages.txt
 
 ## keys = operon name
 ## values = isolate/family name...
