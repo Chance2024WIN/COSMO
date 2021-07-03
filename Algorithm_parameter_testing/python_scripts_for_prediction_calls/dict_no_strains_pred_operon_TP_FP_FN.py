@@ -1,4 +1,4 @@
-## script name: count_intersec_calls_across_lineage.py
+## script name: dict_no_strains_pred_operon_TP_FP_FN.py
 
 #####################################################################################################
 
