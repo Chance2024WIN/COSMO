@@ -1,0 +1,23 @@
+## These scripts are hardcoded.
+
+The script "predicted_operons_counts_per_lineage.py" takes in:
+1. All files produced by COSMO and
+2. The 50_combined_operon_list.txt file
+
+Input files had names such as:
+C5_CONT1_D2_d1_F5_f5.csv
+C5_RIF1_D2_d1_F5_f5.csv, where
+(C5 = strain name; CONT1 = first control; RIF1 = first experimental RIF strain, 
+D2 = min expression CDS, d2 = min expression IGR; 
+F5 = max DF between CDSs; f5 = max FD betw IGR and flanking CDS
+
+
+
+The script "count_intersec_calls_across_lineage.py" is only appropriate for testing files 
+produced by using the previous python script "predicted_operons_counts_per_lineage.py" ABOVE
+
+The "predicted_operons_counts_per_lineage.py" produced files per lineage and per condition
+which have extension names ending in "D2_calls_&_cov_all_lineages.txt".
+Note that because this script had as input the file names above where controls had
+"CONT" in the file name and experimental files had "RIF" (rifampicin) in their name,
+the script finds files with the same name format.
