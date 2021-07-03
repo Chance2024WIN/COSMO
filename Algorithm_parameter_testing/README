@@ -2,3 +2,9 @@
 
 The python scripts, wiggle files and coordinates files in this directory 
 all work/run together 
+
+The folder **Python_scripts** folder are to be used for calculating PPVs and calcuating genomic region averages
+
+The scripts in **python_scripts_for_prediction_calls** are hardcoded for calculating predictions (TP, FP, TN),
+so the README in that folder **must** be carefully read to mimic input file names
+
