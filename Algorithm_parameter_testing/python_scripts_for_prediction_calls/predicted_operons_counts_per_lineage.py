@@ -20,21 +20,24 @@ import string
 import os.path
 import glob
 
-print("Please add the path to the directory containing all the csv files produced by COSMO\n e.g. /home/user/Desktop/COSMO_files/* \n")
+print("Please add the path to the directory containing all the csv files produced by COSMO\n e.g. /home/user/Desktop/COSMO_files/family_name/* \n")
 dir_pred_operon_files = input()
-
+#dir_pred_operon_files = "/home/tracey/Desktop/PhD_Project/data/software/Operon_algorithms/Python_new/tb_operon_detection/output/SRR/*.csv"
 print("Please add the path to the file named: '50_combined_operon_list.txt' \n e.g. /home/user/Desktop/COSMO_files/50_combined_operon_list.txt \n")
 valid_operon_list = input()
-
+# valid_operon_list = "/home/tracey/Desktop/PhD_Project/data/software/Operon_algorithms/Python_new/tb_operon_detection/50_combined_operon_list.txt"
 pred_operons_path = glob.glob(dir_pred_operon_files)
-outfile_name = dir_pred_operon_files.split("/")[-2]  + dir_pred_operon_files.split("/")[-1].split("*")[1] + "_calls_&_cov_all_lineages.txt"
-outfile_name_counts = dir_pred_operon_files.split("/")[-2] + dir_pred_operon_files.split("/")[-1].split("*")[1] + "_counts_per_isolate.txt"
+
+# create file names
+outfile_name = dir_pred_operon_files.split("/")[-2] + "_calls_&_cov_all_lineages.txt" #.split(".")[1]
+outfile_name_counts = dir_pred_operon_files.split("/")[-2] +  "_counts_per_isolate.txt"
+
 outfile = open(outfile_name, "w")
 outfile_counts = open(outfile_name_counts, "w")
 
-###############################################################
-# add the lines from each file with VALIDATED operons to a list
 ##############################################################
+# add the lines from each file with VALIDATED operons to a list
+#############################################################
 operon_lists, validated_operons = [],[]
 list_of_list_operon_genes = []
 list_operon_genes = []

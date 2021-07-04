@@ -27,7 +27,7 @@ import pandas as pd
 print("Please add the path to the directory containing all files with extension: \n e.g. home/user/Desktop/*D2*calls_&_cov_all_lineages.txt\n")
 call_files = input()
 
-# call_files = "/home/tracey/Desktop/PhD_Project/data/software/Operon_algorithms/Python_new/tb_operon_detection/RESULTS/test/*D2*calls_&_cov_all_lineages.txt"
+# call_files = "/home/tracey/Desktop/PhD_Project/data/software/Operon_algorithms/Python_new/tb_operon_detection/RESULTS/*D2*calls_&_cov_all_lineages.txt"
 call_files_path = glob.glob(call_files)
 outfile_all_name =  "Intersection_calls_ALL_lineages.txt"
 # outfile_control = "All_control_calls.txt"
@@ -166,6 +166,7 @@ outfile_all_strains.write("\n\n")
 heading_counts_FN_ALL = "Number of isolates which called the operons as FN\n"
 outfile_all_strains.write(heading_counts_FN_ALL)
 counts_FN_ALL = pd.Series(FN_list_ALL).value_counts()
-print("The file: Intersection_calls_ALL_lineages.txt, has been successfully printed to the directory where this script is stored")
 outfile_all_strains.write(str(counts_FN_ALL))
+
+print("The file: Intersection_calls_ALL_lineages.txt, has been successfully printed to the directory where this script is stored")
 outfile_all_strains.write("\n\n")
