@@ -15,10 +15,10 @@ Operating System :: POSIX :: Linux
 """.strip().split('\n')
 
 setup(
-    name='tb_operon_detect',
+    name='COSMO',
     version='0.1.0',
     packages=find_packages(exclude=['tests']),
-    url='https://github.com/hocinebendou/tb_operon_detection',
+    url='https://github.com/SANBI-SA/COSMO',
     license='GPLv3',
     author='Hocine Bendou',
     author_email='hocine@sanbi.ac.za',
@@ -34,7 +34,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'tb_operon_detection = user_input:main',
+            'tb_operon_detection = operon.user_input:main',
         ]
     }
 )
