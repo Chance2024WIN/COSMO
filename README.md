@@ -63,6 +63,6 @@ Example code for running a file where the:
 8) Input bam file = Strain_5_control.bam 
 9) GTF file name = NC_000962_tuberculosis.gtf
 
-`python user_input.py -D 1 -d 2 -F 5.0 -f 10.0 -o Strain_5_control.csv NC_000962 4411532 /home/Sally/Input_bam_files/Strain_5_control.bam /home/Sally/Input_bam_files/NC_000962_tuberculosis.gtf`
+**python user_input.py -D 1 -d 2 -F 5.0 -f 10.0 -o Strain_5_control.csv NC_000962 4411532 /home/Sally/Input_bam_files/Strain_5_control.bam /home/Sally/Input_bam_files/NC_000962_tuberculosis.gtf**
 
 ```    
