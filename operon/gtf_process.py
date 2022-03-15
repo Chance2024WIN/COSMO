@@ -39,7 +39,7 @@ class GtfProcess:
             for line in fh:
                 if line.startswith('#'):
                     continue
-                if not line.split()[2] == "gene":
+                if not line.split('\t')[2] == "gene":
                 	continue
                 else:
                     yield self.parse(line)
