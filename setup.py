@@ -25,7 +25,7 @@ setup(
     description='Tool to detect operons (relative to M. tuberculosis H37Rv) using gene expression levels.',
     keywords='Mycobacterium tuberculosis bioinformatics',
     classifiers=classifiers,
-    package_dir={'tb_operon_detection': 'tb_operon_detection'},
+    package_dir={'COSMO': 'COSMO'},
     install_requires=[
         'pysam>=0.15.0',
     ],
@@ -34,7 +34,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'tb_operon_detection = operon.user_input:main',
+            'COSMO = operon.user_input:main',
         ]
     }
 )
