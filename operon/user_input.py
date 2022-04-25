@@ -37,11 +37,11 @@ def main():
 
     # optional arguments
     parser.add_argument("-D", "--gdepth", help="Average number of reads per base required to consider a gene expressed",
-                                          type=int, default=10)
+                                          type=int, default=2)
     parser.add_argument("-d", "--idepth", help="Average number of reads per base required to consider a IGR expressed",
-                                          type=int, default=10)
+                                          type=int, default=1)
     parser.add_argument("-F", "--gfactor", help="Allowed difference factor of two gene's coverages to be part of "
-                                                "same Operon", type=float, default=4.5)
+                                                "same Operon", type=float, default=5.0)
     parser.add_argument("-f", "--ifactor", help="Allowed difference factor of IGR and adjacent gene's coverages "
                                                 "to be part of same operon", type=float, default=5.0)
     parser.add_argument("-o", "--output", help="CSV output filename under output folder", type=str, default="detected-operons.csv")
