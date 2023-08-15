@@ -25,3 +25,8 @@ jobs:
       - name: run tests
         run: |
           python -m pytest
+      
+      - name: install and test
+        run: |
+          pip install -e .
+          COSMO --help
