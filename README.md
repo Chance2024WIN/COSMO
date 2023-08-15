@@ -4,7 +4,7 @@ To cite: [![DOI](https://zenodo.org/badge/182076507.svg)](https://zenodo.org/bad
 
 Condition-specific Mapping of Operons (COSMO) is a tool for detecting operons in microorganisms
 
-[![CircleCI](https://circleci.com/gh/hocinebendou/tb_operon_detection.svg?style=svg)](https://circleci.com/gh/hocinebendou/tb_operon_detection)
+![Github Actions Cosmo Testing](https://github.com/sanbi-sa/COSMO/actions/workflows/cosmo.yml/badge.svg)
 
 An **Operon** consists of a group of structural genes that codes for enzymes involved in a metabolic pathway.
 The genes of an operon are located contiguously on a stretch DNA and are under the control of one promoter.
