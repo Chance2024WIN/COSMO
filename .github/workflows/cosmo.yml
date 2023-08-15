@@ -20,7 +20,7 @@ jobs:
           channels: conda-forge,bioconda,defaults
           auto-activate-base: false
           activate-environment: cosmo
-          environment_file: .github/workflows/test_environment.yml
+          environment-file: test/test_environment.yml
       
       - name: run tests
         run: |
