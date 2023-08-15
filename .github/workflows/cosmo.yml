@@ -1,0 +1,28 @@
+---
+name: cosmo
+on: push
+
+jobs:
+  create-env:
+    name: cosmo-python
+    runs-on: ${{ ubuntu-latest }}
+    defaults:
+      run:
+        shell: bash -l {0}
+    
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+      
+      - name: create environment with mamba
+        uses: conda-incubator/setup-miniconda2
+        with:
+          mamba-version: "*"
+          channels: conda-forge,bioconda,defaults
+          auto-activate-base: false
+          activate-environment: cosmo
+          environment_file: .github/workflows/test_environment.yml
+      
+      - name: run tests
+        run: |
+          python -m pytest
