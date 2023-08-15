@@ -1,6 +1,6 @@
 ---
 name: cosmo
-on: push
+on: [push]
 
 jobs:
   create-env:
