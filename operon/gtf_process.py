@@ -39,9 +39,9 @@ class GtfProcess:
             for line in fh:
                 if line.startswith('#'):
                     continue
-                if not line.split('\t')[2] == "gene":
-                	continue
-                else:
+                fields = line.split('\t')
+                if fields[2] == "gene" or fields[2] == "CDS":
+                    # only return lines with type of gene or CDS
                     yield self.parse(line)
 
     def parse(self, line):

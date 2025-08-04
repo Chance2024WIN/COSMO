@@ -68,12 +68,12 @@ class Detect(Analyze):
             #if cov == 0 or avg_cov ==0: #(Tracey added this line and the next and changes the third line after this to "elif". check Hocine)
                  #continue
             try:
-            	if avg_cov / cov < self.gene_factor and cov / avg_cov < self.gene_factor:
-                	adj_covs.append(cov)
-            	else:
-                	adj_covs.append(cov)
-                	if cov == val:
-                	    break
+                if avg_cov / cov < self.gene_factor and cov / avg_cov < self.gene_factor:
+                    adj_covs.append(cov)
+                else:
+                    adj_covs.append(cov)
+                    if cov == val:
+                        break
             except ZeroDivisionError:
                 pass
 
@@ -120,11 +120,17 @@ class Detect(Analyze):
         for line in lines:
             start = int(line['start'])
             end = int(line['end'])
+            if 'gene_id' in line:
+                gene_name = line['gene_id']
+            elif 'ID' in line:
+                gene_name = line['ID']
+            else:
+                raise ValueError(f'Neither gene_id nor ID in line {line}')
             avg_cov = average_coverage(alignment_file, self.ref_seq, start, end, line['strand'])
             if op is None:
                 if avg_cov < self.gene_depth:
                     fs_writer.writerow([
-                        line['gene_id'],
+                        gene_name,
                         str(start),
                         str(end),
                         str(end - start),
@@ -133,11 +139,11 @@ class Detect(Analyze):
                         str(avg_cov)
                     ])
                 else:
-                    op = Operon.operon(start, end, line['strand'], line['gene_id'], avg_cov)
+                    op = Operon.operon(start, end, line['strand'], gene_name, avg_cov)
             elif avg_cov < self.gene_depth:
                 self.print(fs_writer, op)
                 fs_writer.writerow([
-                    line['gene_id'],
+                    gene_name,
                     str(start),
                     str(end),
                     str(end - start),
@@ -148,7 +154,7 @@ class Detect(Analyze):
                 op = None
             elif op.strand != line['strand']:
                 self.print(fs_writer, op)
-                op = Operon.operon(start, end, line['strand'], line['gene_id'], avg_cov)
+                op = Operon.operon(start, end, line['strand'], gene_name, avg_cov)
             else:
                 if op.end < start and start - op.end > 4:
                     igr_cov = average_coverage(alignment_file, self.ref_seq, op.end, start, line['strand'])
@@ -164,7 +170,7 @@ class Detect(Analyze):
 
                         adj_covs = self.adjacent_coverages(op, avg_cov)
                         if len(adj_covs) == len(op.genes_covs()):
-                            op.add_gene(start, end, line['gene_id'], avg_cov, igr_cov)
+                            op.add_gene(start, end, gene_name, avg_cov, igr_cov)
                         else:
                             if len(adj_covs) > 0:
                                 op_1 = None
@@ -196,27 +202,27 @@ class Detect(Analyze):
                                                 # op_2.genes.append(gene)
                                 if op_2 is None and op_1 is not None:
                                     self.print(fs_writer, op_1)
-                                    op_2 = Operon.operon(start, end, line['strand'], line['gene_id'], avg_cov)
+                                    op_2 = Operon.operon(start, end, line['strand'], gene_name, avg_cov)
                                 elif op_2 is not None:
                                     gene = op_2.genes[-1]
                                     if gene.cov / avg_cov < self.gene_factor and avg_cov / gene.cov < self.gene_factor:
-                                        op_2.add_gene(start, end, line['gene_id'], avg_cov, igr_cov)
+                                        op_2.add_gene(start, end, gene_name, avg_cov, igr_cov)
                                     else:
                                         self.print(fs_writer, op_2)
-                                        op_2 = Operon.operon(start, end, line['strand'], line['gene_id'], avg_cov)
+                                        op_2 = Operon.operon(start, end, line['strand'], gene_name, avg_cov)
                                 op = op_2
                             else:
                                 self.print(fs_writer, op)
-                                op = Operon.operon(start, end, line['strand'], line['gene_id'], avg_cov)
+                                op = Operon.operon(start, end, line['strand'], gene_name, avg_cov)
                     else:
                         self.print(fs_writer, op)
-                        op = Operon.operon(start, end, line['strand'], line['gene_id'], avg_cov)
+                        op = Operon.operon(start, end, line['strand'], gene_name, avg_cov)
                 elif op.end < start:
                     igr_cov = average_coverage(alignment_file, self.ref_seq, op.end, start, line['strand'])
                     if igr_cov > self.igr_depth:
-                        op.add_gene(start, end, line['gene_id'], avg_cov, igr_cov)
+                        op.add_gene(start, end, gene_name, avg_cov, igr_cov)
                 else:
-                    op.add_gene(start, end, line['gene_id'], avg_cov, 0)
+                    op.add_gene(start, end, gene_name, avg_cov, 0)
             if num_genes % 1000 == 0:
                 print('\n' + str(num_genes / 1000) + ':', end='')
             else:
@@ -280,18 +286,18 @@ class Detect(Analyze):
                         if igr_cov > self.igr_depth and iql_cov > self.igr_depth and \
                                 last_gene_cov / iql_cov < self.igr_factor and iql_cov / last_gene_cov < self.igr_factor and \
                                 avg_cov / iql_cov < self.igr_factor and iql_cov / avg_cov < self.igr_factor:
-                            op.add_gene(start, end, line['gene_id'], avg_cov, igr_cov)
+                            op.add_gene(start, end, gene_name, avg_cov, igr_cov)
                         else:
                             self.print(fs_writer, op)
                             break
                     elif op.end < start:
                         if igr_cov > self.igr_depth:
-                            op.add_gene(start, end, line['gene_id'], avg_cov, igr_cov)
+                            op.add_gene(start, end, gene_name, avg_cov, igr_cov)
                         else:
                             self.print(fs_writer, op)
                             break
                     else:
-                        op.add_gene(start, end, line['gene_id'], avg_cov, 0)
+                        op.add_gene(start, end, gene_name, avg_cov, 0)
 
                 if num_genes % 1000 == 0:
                     print('\n' + str(num_genes / 1000) + ':', end='')
