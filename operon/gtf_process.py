@@ -37,9 +37,10 @@ class GtfProcess:
 
         with fn_open(self.filename) as fh:
             for line in fh:
-                if line.startswith('#'):
+                if line.startswith('#') or line.strip() == "":
                     continue
                 fields = line.split('\t')
+                assert len(fields) == 9, f'Error in file format: {line} : {fields}'
                 if fields[2] == "gene" or fields[2] == "CDS":
                     # only return lines with type of gene or CDS
                     yield self.parse(line)
